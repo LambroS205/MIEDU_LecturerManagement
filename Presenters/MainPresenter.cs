@@ -39,8 +39,14 @@ namespace MIEDU_LecturerManagement.Presenters
 
         private void ShowAssignments(object sender, EventArgs e)
         {
-            Label lblTemp = new Label { Text = "Đây là màn hình Phân công môn học", Dock = DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleCenter, Font = new System.Drawing.Font("Segoe UI", 16) };
-            _mainView.ShowViewInMainContainer(lblTemp);
+            var assignmentView = new Views.UserControls.AssignmentViewControl();
+            var assignmentRepo = new DataAccess.Repositories.AssignmentRepository();
+            var lecturerRepo = new DataAccess.Repositories.LecturerRepository();
+            var subjectRepo = new DataAccess.Repositories.SubjectRepository();
+
+            var presenter = new AssignmentPresenter(assignmentView, assignmentRepo, lecturerRepo, subjectRepo);
+
+            _mainView.ShowViewInMainContainer(assignmentView);
         }
 
         private void Logout(object sender, EventArgs e)
