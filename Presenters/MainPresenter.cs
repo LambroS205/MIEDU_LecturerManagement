@@ -17,6 +17,7 @@ namespace MIEDU_LecturerManagement.Presenters
             // Đăng ký sự kiện
             _mainView.ShowLecturersEvent += ShowLecturers;
             _mainView.ShowAssignmentsEvent += ShowAssignments;
+            _mainView.ShowUsersEvent += ShowUsers;
             _mainView.LogoutEvent += Logout;
 
             // Thiết lập thông tin (Giả lập, thực tế lấy từ AppSession.CurrentUser)
@@ -47,6 +48,14 @@ namespace MIEDU_LecturerManagement.Presenters
             var presenter = new AssignmentPresenter(assignmentView, assignmentRepo, lecturerRepo, subjectRepo);
 
             _mainView.ShowViewInMainContainer(assignmentView);
+        }
+
+        private void ShowUsers(object sender, EventArgs e)
+        {
+            var userView = new Views.UserControls.UserViewControl();
+            var userRepo = new DataAccess.Repositories.UserRepository();
+            var presenter = new UserPresenter(userView, userRepo);
+            _mainView.ShowViewInMainContainer(userView);
         }
 
         private void Logout(object sender, EventArgs e)

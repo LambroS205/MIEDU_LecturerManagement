@@ -8,6 +8,7 @@ namespace MIEDU_LecturerManagement.Views.Interfaces
         // Sự kiện khi nhấn các nút trên Sidebar
         event EventHandler ShowLecturersEvent;
         event EventHandler ShowAssignmentsEvent;
+        event EventHandler ShowUsersEvent;
         event EventHandler LogoutEvent;
 
         // Phương thức để nhúng UserControl/View con vào vùng nội dung chính

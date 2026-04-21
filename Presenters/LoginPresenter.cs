@@ -1,7 +1,7 @@
-﻿// File: Presenters/LoginPresenter.cs
-using System;
+﻿using System;
 using MIEDU_LecturerManagement.Views.Interfaces;
 using MIEDU_LecturerManagement.DataAccess.Interfaces;
+using MIEDU_LecturerManagement.Utils; // Bổ sung thư viện Utils chứa SecurityHelper
 
 namespace MIEDU_LecturerManagement.Presenters
 {
@@ -27,19 +27,16 @@ namespace MIEDU_LecturerManagement.Presenters
                 return;
             }
 
-            // TODO: Trong thực tế, bạn cần mã hóa (Hash) _view.Password ở đây trước khi so sánh DB
-            // Ở ví dụ này, giả sử mật khẩu trong DB lưu dạng plain text (không khuyến khích)
-            // hoặc đã được mã hóa ở đâu đó tương ứng.
-            string hashedPwd = _view.Password;
+            // [ĐÃ SỬA]: Sử dụng SecurityHelper để băm mật khẩu người dùng nhập vào
+            // trước khi mang xuống CSDL so sánh
+            string hashedPwd = SecurityHelper.HashPassword(_view.Password);
 
             var user = _repository.Authenticate(_view.Username, hashedPwd);
 
             if (user != null)
             {
-                // Lưu thông tin người dùng đang đăng nhập vào Utils (để kiểm tra quyền sau này)
-                // AppSession.CurrentUser = user; 
+                // TODO: Lưu thông tin Session ở đây (nếu làm Bước 9)
                 _view.HideView();
-                // MainForm sẽ được khởi tạo và hiển thị sau khi LoginForm đóng.
             }
             else
             {

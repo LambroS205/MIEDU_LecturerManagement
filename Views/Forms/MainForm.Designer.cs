@@ -14,6 +14,7 @@ namespace MIEDU_LecturerManagement.Views.Forms
         private Label lblLogo;
         private Button btnManageLecturers;
         private Button btnManageAssignments;
+        private Button btnManageUsers;
         private Button btnLogout;
 
         // Controls cho Topbar và Nội dung chính
@@ -37,6 +38,7 @@ namespace MIEDU_LecturerManagement.Views.Forms
             this.lblLogo = new System.Windows.Forms.Label();
             this.btnManageLecturers = new System.Windows.Forms.Button();
             this.btnManageAssignments = new System.Windows.Forms.Button();
+            this.btnManageUsers = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
 
             this.pnlTopBar = new System.Windows.Forms.Panel();
@@ -55,6 +57,7 @@ namespace MIEDU_LecturerManagement.Views.Forms
             this.pnlSidebar.Controls.Add(this.btnLogout);
             this.pnlSidebar.Controls.Add(this.btnManageAssignments);
             this.pnlSidebar.Controls.Add(this.btnManageLecturers);
+            this.pnlSidebar.Controls.Add(this.btnManageUsers);
             this.pnlSidebar.Controls.Add(this.pnlLogo);
             this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
@@ -114,6 +117,23 @@ namespace MIEDU_LecturerManagement.Views.Forms
             this.btnManageAssignments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnManageAssignments.UseVisualStyleBackColor = true;
             this.btnManageAssignments.Cursor = System.Windows.Forms.Cursors.Hand;
+
+            //
+            // btnManageUsers
+            //
+            this.btnManageUsers.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnManageUsers.FlatAppearance.BorderSize = 0;
+            this.btnManageUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnManageUsers.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnManageUsers.ForeColor = System.Drawing.Color.FromArgb(206, 212, 218);
+            this.btnManageUsers.Location = new System.Drawing.Point(0, 160); // 160 = 110 (Y của btnAssignments) + 50 (Chiều cao)
+            this.btnManageUsers.Name = "btnManageUsers";
+            this.btnManageUsers.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.btnManageUsers.Size = new System.Drawing.Size(250, 50);
+            this.btnManageUsers.Text = "Hệ thống / Users";
+            this.btnManageUsers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnManageUsers.UseVisualStyleBackColor = true;
+            this.btnManageUsers.Cursor = System.Windows.Forms.Cursors.Hand;
 
             // 
             // btnLogout
