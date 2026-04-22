@@ -14,6 +14,7 @@ namespace MIEDU_LecturerManagement.Views.Forms
         }
 
         // Triển khai IMainView
+        public event EventHandler ShowDashboardEvent;
         public event EventHandler ShowLecturersEvent;
         public event EventHandler ShowAssignmentsEvent;
         public event EventHandler ShowUsersEvent;
@@ -36,6 +37,7 @@ namespace MIEDU_LecturerManagement.Views.Forms
 
         private void AssociateAndRaiseViewEvents()
         {
+            btnHome.Click += delegate { ShowDashboardEvent?.Invoke(this, EventArgs.Empty); };
             btnManageLecturers.Click += delegate { ShowLecturersEvent?.Invoke(this, EventArgs.Empty); };
             btnManageAssignments.Click += delegate { ShowAssignmentsEvent?.Invoke(this, EventArgs.Empty); };
             btnManageUsers.Click += delegate { ShowUsersEvent?.Invoke(this, EventArgs.Empty); };

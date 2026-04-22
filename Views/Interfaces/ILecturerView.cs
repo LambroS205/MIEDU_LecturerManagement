@@ -19,6 +19,7 @@ namespace MIEDU_LecturerManagement.Views.Interfaces
         event EventHandler AddNewEvent;
         event EventHandler EditEvent;
         event EventHandler DeleteEvent;
-        event EventHandler LoadEvent; // Khi View vừa được mở lên
+        event EventHandler LoadEvent;
+        event EventHandler ExportEvent;
     }
 }

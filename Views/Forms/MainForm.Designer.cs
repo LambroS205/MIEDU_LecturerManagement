@@ -12,6 +12,7 @@ namespace MIEDU_LecturerManagement.Views.Forms
         private Panel pnlSidebar;
         private Panel pnlLogo;
         private Label lblLogo;
+        private Button btnHome;
         private Button btnManageLecturers;
         private Button btnManageAssignments;
         private Button btnManageUsers;
@@ -36,6 +37,7 @@ namespace MIEDU_LecturerManagement.Views.Forms
             this.pnlSidebar = new System.Windows.Forms.Panel();
             this.pnlLogo = new System.Windows.Forms.Panel();
             this.lblLogo = new System.Windows.Forms.Label();
+            this.btnHome = new System.Windows.Forms.Button();
             this.btnManageLecturers = new System.Windows.Forms.Button();
             this.btnManageAssignments = new System.Windows.Forms.Button();
             this.btnManageUsers = new System.Windows.Forms.Button();
@@ -58,6 +60,7 @@ namespace MIEDU_LecturerManagement.Views.Forms
             this.pnlSidebar.Controls.Add(this.btnManageAssignments);
             this.pnlSidebar.Controls.Add(this.btnManageLecturers);
             this.pnlSidebar.Controls.Add(this.btnManageUsers);
+            this.pnlSidebar.Controls.Add(this.btnHome);
             this.pnlSidebar.Controls.Add(this.pnlLogo);
             this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
@@ -83,6 +86,23 @@ namespace MIEDU_LecturerManagement.Views.Forms
             this.lblLogo.Location = new System.Drawing.Point(20, 15);
             this.lblLogo.Name = "lblLogo";
             this.lblLogo.Text = "MIEDU Portal";
+
+            //
+            // btnHome
+            //
+            this.btnHome.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnHome.FlatAppearance.BorderSize = 0;
+            this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHome.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnHome.ForeColor = System.Drawing.Color.FromArgb(206, 212, 218);
+            this.btnHome.Location = new System.Drawing.Point(0, 60); // Nằm ngay dưới Logo
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.btnHome.Size = new System.Drawing.Size(250, 50);
+            this.btnHome.Text = "Trang chủ";
+            this.btnHome.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.Cursor = System.Windows.Forms.Cursors.Hand;
 
             // 
             // btnManageLecturers

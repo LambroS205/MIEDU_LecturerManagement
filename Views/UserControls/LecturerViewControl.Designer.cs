@@ -15,6 +15,7 @@ namespace MIEDU_LecturerManagement.Views.UserControls
         private Button btnAdd;
         private Button btnEdit;
         private Button btnDelete;
+        private Button btnExport; // Nút Export mới
         private DataGridView dgvLecturers;
 
         protected override void Dispose(bool disposing)
@@ -35,6 +36,7 @@ namespace MIEDU_LecturerManagement.Views.UserControls
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
             this.dgvLecturers = new System.Windows.Forms.DataGridView();
 
             this.pnlTopBar.SuspendLayout();
@@ -45,6 +47,7 @@ namespace MIEDU_LecturerManagement.Views.UserControls
             // pnlTopBar
             // 
             this.pnlTopBar.BackColor = System.Drawing.Color.White;
+            this.pnlTopBar.Controls.Add(this.btnExport);
             this.pnlTopBar.Controls.Add(this.btnDelete);
             this.pnlTopBar.Controls.Add(this.btnEdit);
             this.pnlTopBar.Controls.Add(this.btnAdd);
@@ -54,8 +57,7 @@ namespace MIEDU_LecturerManagement.Views.UserControls
             this.pnlTopBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTopBar.Location = new System.Drawing.Point(0, 0);
             this.pnlTopBar.Name = "pnlTopBar";
-            this.pnlTopBar.Size = new System.Drawing.Size(910, 80); // Kích thước trừ hao padding của MainForm
-            // Border bottom
+            this.pnlTopBar.Size = new System.Drawing.Size(910, 80);
             this.pnlTopBar.Paint += (sender, e) => {
                 ControlPaint.DrawBorder(e.Graphics, this.pnlTopBar.ClientRectangle,
                     Color.Transparent, 0, ButtonBorderStyle.None,
@@ -79,7 +81,7 @@ namespace MIEDU_LecturerManagement.Views.UserControls
             // 
             this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtSearch.Location = new System.Drawing.Point(340, 30);
+            this.txtSearch.Location = new System.Drawing.Point(250, 30); // Đã dịch trái
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PlaceholderText = "Tìm theo tên, mã GV...";
             this.txtSearch.Size = new System.Drawing.Size(200, 25);
@@ -88,11 +90,11 @@ namespace MIEDU_LecturerManagement.Views.UserControls
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(108, 117, 125); // Secondary Gray
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(108, 117, 125);
             this.btnSearch.FlatAppearance.BorderSize = 0;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(550, 29);
+            this.btnSearch.Location = new System.Drawing.Point(460, 29); // Đã dịch trái
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(80, 27);
             this.btnSearch.Text = "Tìm kiếm";
@@ -102,11 +104,11 @@ namespace MIEDU_LecturerManagement.Views.UserControls
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(25, 135, 84); // Success Green
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(25, 135, 84);
             this.btnAdd.FlatAppearance.BorderSize = 0;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(640, 29);
+            this.btnAdd.Location = new System.Drawing.Point(550, 29); // Đã dịch trái
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(80, 27);
             this.btnAdd.Text = "Thêm mới";
@@ -116,11 +118,11 @@ namespace MIEDU_LecturerManagement.Views.UserControls
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(255, 193, 7); // Warning Yellow
+            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(255, 193, 7);
             this.btnEdit.FlatAppearance.BorderSize = 0;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.ForeColor = System.Drawing.Color.Black;
-            this.btnEdit.Location = new System.Drawing.Point(730, 29);
+            this.btnEdit.Location = new System.Drawing.Point(640, 29); // Đã dịch trái
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(80, 27);
             this.btnEdit.Text = "Chỉnh sửa";
@@ -130,15 +132,29 @@ namespace MIEDU_LecturerManagement.Views.UserControls
             // btnDelete
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(220, 53, 69); // Danger Red
+            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(220, 53, 69);
             this.btnDelete.FlatAppearance.BorderSize = 0;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(820, 29);
+            this.btnDelete.Location = new System.Drawing.Point(730, 29); // Đã dịch trái
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(80, 27);
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = false;
+
+            // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExport.BackColor = System.Drawing.Color.FromArgb(13, 202, 240); // Cyan nổi bật
+            this.btnExport.FlatAppearance.BorderSize = 0;
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.ForeColor = System.Drawing.Color.Black;
+            this.btnExport.Location = new System.Drawing.Point(820, 29); // Nằm góc phải
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(80, 27);
+            this.btnExport.Text = "Xuất Excel";
+            this.btnExport.UseVisualStyleBackColor = false;
 
             // 
             // dgvLecturers
@@ -157,7 +173,6 @@ namespace MIEDU_LecturerManagement.Views.UserControls
             this.dgvLecturers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLecturers.Size = new System.Drawing.Size(910, 520);
 
-            // Style cho DataGridView
             this.dgvLecturers.EnableHeadersVisualStyles = false;
             this.dgvLecturers.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(248, 249, 250);
             this.dgvLecturers.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(33, 37, 41);

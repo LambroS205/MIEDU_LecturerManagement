@@ -29,6 +29,12 @@ namespace MIEDU_LecturerManagement.Views.UserControls
         public event EventHandler EditEvent;
         public event EventHandler DeleteEvent;
         public event EventHandler LoadEvent;
+        public event EventHandler ExportEvent;
+
+        public void ShowMessage(string message)
+        {
+            MessageBox.Show(message, "Thông báo");
+        }
 
         public void SetLecturerListBindingSource(BindingSource lecturerList)
         {
@@ -68,6 +74,7 @@ namespace MIEDU_LecturerManagement.Views.UserControls
             btnAdd.Click += delegate { AddNewEvent?.Invoke(this, EventArgs.Empty); };
             btnEdit.Click += delegate { EditEvent?.Invoke(this, EventArgs.Empty); };
             btnDelete.Click += delegate { DeleteEvent?.Invoke(this, EventArgs.Empty); };
+            btnExport.Click += delegate { ExportEvent?.Invoke(this, EventArgs.Empty); };
         }
     }
 }

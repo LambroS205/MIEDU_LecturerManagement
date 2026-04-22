@@ -6,6 +6,7 @@ namespace MIEDU_LecturerManagement.Views.Interfaces
     public interface IMainView
     {
         // Sự kiện khi nhấn các nút trên Sidebar
+        event EventHandler ShowDashboardEvent;
         event EventHandler ShowLecturersEvent;
         event EventHandler ShowAssignmentsEvent;
         event EventHandler ShowUsersEvent;

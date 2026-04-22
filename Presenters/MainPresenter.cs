@@ -14,7 +14,9 @@ namespace MIEDU_LecturerManagement.Presenters
         {
             _mainView = mainView;
 
+            ShowDashboard();
             // Đăng ký sự kiện
+            _mainView.ShowDashboardEvent += ShowDashboard;
             _mainView.ShowLecturersEvent += ShowLecturers;
             _mainView.ShowAssignmentsEvent += ShowAssignments;
             _mainView.ShowUsersEvent += ShowUsers;
@@ -22,6 +24,16 @@ namespace MIEDU_LecturerManagement.Presenters
 
             // Thiết lập thông tin (Giả lập, thực tế lấy từ AppSession.CurrentUser)
             _mainView.SetUserInfo("Xin chào, Admin");
+
+        }
+
+        private void ShowDashboard(object sender = null, EventArgs e = null)
+        {
+            var dashboardView = new Views.UserControls.DashboardViewControl();
+            var dashboardRepo = new DataAccess.Repositories.DashboardRepository();
+            var presenter = new DashboardPresenter(dashboardView, dashboardRepo);
+
+            _mainView.ShowViewInMainContainer(dashboardView);
         }
 
         private void ShowLecturers(object sender, EventArgs e)
@@ -36,7 +48,6 @@ namespace MIEDU_LecturerManagement.Presenters
             // Ban đầu hiển thị danh sách
             _mainView.ShowViewInMainContainer(listView);
         }
-
 
         private void ShowAssignments(object sender, EventArgs e)
         {

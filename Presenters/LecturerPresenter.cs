@@ -32,6 +32,7 @@ namespace MIEDU_LecturerManagement.Presenters
             _listView.AddNewEvent += OpenAddMode;
             _listView.EditEvent += OpenEditMode;
             _listView.DeleteEvent += DeleteLecturer;
+            _listView.ExportEvent += ExportLecturers;
             _listView.SetLecturerListBindingSource(_lecturersBindingSource);
 
             // --- Đăng ký sự kiện cho Detail View ---
@@ -76,6 +77,36 @@ namespace MIEDU_LecturerManagement.Presenters
             {
                 _repository.DeleteLecturer(current.PersonId);
                 LoadAllLecturers(this, EventArgs.Empty);
+            }
+        }
+        private void ExportLecturers(object sender, EventArgs e)
+        {
+            using (var sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "Excel CSV File (*.csv)|*.csv";
+                sfd.FileName = "DanhSachGiangVien.csv";
+                sfd.Title = "Chọn nơi lưu danh sách Giảng viên";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        // Lấy dữ liệu đang được hiển thị hiện tại (_lecturerList là biến đã lưu ở hàm Search/Load)
+                        // Nếu danh sách trống, ta lấy toàn bộ từ Repo
+                        var dataToExport = _lecturersBindingSource.DataSource as IEnumerable<Lecturer>
+                                            ?? _repository.GetAllLecturers();
+                        // Gọi Utils ghi file
+                        Utils.ExportHelper.ExportLecturersToCSV(dataToExport, sfd.FileName);
+
+                        MessageBox.Show("Xuất dữ liệu ra Excel thành công!\nFile được lưu tại: " + sfd.FileName,
+                            "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Đã xảy ra lỗi khi xuất file: " + ex.Message,
+                            "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
 
