@@ -27,15 +27,14 @@ namespace MIEDU_LecturerManagement.Presenters
                 return;
             }
 
-            // [ĐÃ SỬA]: Sử dụng SecurityHelper để băm mật khẩu người dùng nhập vào
-            // trước khi mang xuống CSDL so sánh
             string hashedPwd = SecurityHelper.HashPassword(_view.Password);
-
             var user = _repository.Authenticate(_view.Username, hashedPwd);
 
             if (user != null)
             {
-                // TODO: Lưu thông tin Session ở đây (nếu làm Bước 9)
+                // [MỚI]: Lưu thông tin User vào Session toàn cục
+                AppSession.CurrentUser = user;
+
                 _view.HideView();
             }
             else

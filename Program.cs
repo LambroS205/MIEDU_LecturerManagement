@@ -1,9 +1,10 @@
-// File: Program.cs (Cập nhật)
+// File: Program.cs
 using System;
 using System.Windows.Forms;
 using MIEDU_LecturerManagement.Views.Forms;
 using MIEDU_LecturerManagement.Presenters;
 using MIEDU_LecturerManagement.DataAccess.Repositories;
+using MIEDU_LecturerManagement.Utils; // Bổ sung thư viện
 
 namespace MIEDU_LecturerManagement
 {
@@ -15,20 +16,37 @@ namespace MIEDU_LecturerManagement
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var loginView = new LoginForm();
-            var userRepository = new UserRepository();
-            var loginPresenter = new LoginPresenter(loginView, userRepository);
+            bool showLogin = true;
 
-            Application.Run(loginView);
-
-            // Nếu đăng nhập thành công
-            if (loginView.DialogResult == DialogResult.OK)
+            // Vòng lặp quản lý vòng đời ứng dụng
+            while (showLogin)
             {
-                var mainView = new MainForm();
-                var mainPresenter = new MainPresenter(mainView);
+                showLogin = false; // Mặc định là thoát ứng dụng
 
-                // Khởi chạy MainForm
-                Application.Run(mainView);
+                using (var loginView = new LoginForm())
+                {
+                    var userRepository = new UserRepository();
+                    var loginPresenter = new LoginPresenter(loginView, userRepository);
+
+                    // Nếu người dùng đăng nhập thành công
+                    if (loginView.ShowDialog() == DialogResult.OK)
+                    {
+                        using (var mainView = new MainForm())
+                        {
+                            var mainPresenter = new MainPresenter(mainView);
+
+                            // Khởi chạy Dashboard chính
+                            Application.Run(mainView);
+
+                            // Khi MainForm bị đóng (do bấm X, hoặc do bấm Đăng xuất)
+                            // Ta kiểm tra xem có phải do bấm Đăng xuất không (Session bị xóa = null)
+                            if (!AppSession.IsLoggedIn)
+                            {
+                                showLogin = true; // Bật lại cờ để vòng lặp while quay lại mở LoginForm
+                            }
+                        }
+                    }
+                }
             }
         }
     }

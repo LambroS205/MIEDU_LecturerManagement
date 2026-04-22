@@ -5,17 +5,17 @@ namespace MIEDU_LecturerManagement.Views.Interfaces
 {
     public interface IMainView
     {
-        // Sự kiện khi nhấn các nút trên Sidebar
         event EventHandler ShowDashboardEvent;
         event EventHandler ShowLecturersEvent;
         event EventHandler ShowAssignmentsEvent;
         event EventHandler ShowUsersEvent;
         event EventHandler LogoutEvent;
 
-        // Phương thức để nhúng UserControl/View con vào vùng nội dung chính
         void ShowViewInMainContainer(object view);
-
-        // Cập nhật thông tin người dùng đang đăng nhập
         void SetUserInfo(string info);
+        void ConfigureMenuAccess(string role);
+
+        // Thêm hàm này để Presenter có thể ra lệnh đóng Form Main
+        void CloseView();
     }
 }

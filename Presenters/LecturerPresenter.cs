@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using MIEDU_LecturerManagement.Views.Interfaces;
 using MIEDU_LecturerManagement.DataAccess.Interfaces;
 using MIEDU_LecturerManagement.Models;
+using MIEDU_LecturerManagement.Utils;
 
 namespace MIEDU_LecturerManagement.Presenters
 {
@@ -160,32 +161,35 @@ namespace MIEDU_LecturerManagement.Presenters
         }
 
         // ================= XỬ LÝ LƯU (SAVE) =================
+
         private void SaveLecturer(object sender, EventArgs e)
         {
             try
             {
-                // Khởi tạo Model (Thể hiện tính đóng gói)
+                // 1. Khởi tạo Model từ View
                 var lecturer = new Lecturer
                 {
                     PersonId = _detailView.PersonId,
-                    FirstName = _detailView.FirstName,
-                    LastName = _detailView.LastName,
-                    Email = _detailView.Email,
-                    Phone = _detailView.Phone,
+                    FirstName = _detailView.FirstName?.Trim(),
+                    LastName = _detailView.LastName?.Trim(),
+                    Email = _detailView.Email?.Trim(),
+                    Phone = _detailView.Phone?.Trim(),
                     DateOfBirth = _detailView.DateOfBirth,
-                    EmployeeCode = _detailView.EmployeeCode,
+                    EmployeeCode = _detailView.EmployeeCode?.Trim(),
                     DepartmentId = _detailView.DepartmentId,
                     AcademicTitle = _detailView.AcademicTitle,
                     Degree = _detailView.Degree
                 };
 
-                // Basic Validation
-                if (string.IsNullOrWhiteSpace(lecturer.FirstName) || string.IsNullOrWhiteSpace(lecturer.LastName) || string.IsNullOrWhiteSpace(lecturer.EmployeeCode))
+                // 2. Sử dụng ValidationHelper thay vì if/else thủ công
+                if (!ValidationHelper.ValidateModel(lecturer, out string validationErrors))
                 {
-                    _detailView.ShowMessage("Vui lòng nhập đầy đủ Tên, Họ và Mã Giảng viên.");
+                    // Nếu Model không hợp lệ, hiển thị toàn bộ lỗi ra màn hình và dừng lại
+                    _detailView.ShowMessage("Vui lòng kiểm tra lại thông tin nhập:\n\n" + validationErrors);
                     return;
                 }
 
+                // 3. Nếu qua được bước Validation, tiến hành lưu vào CSDL
                 if (_detailView.IsEditMode)
                 {
                     _repository.UpdateLecturer(lecturer);
@@ -197,13 +201,12 @@ namespace MIEDU_LecturerManagement.Presenters
                     _detailView.ShowMessage("Thêm mới thành công!");
                 }
 
-                // Thành công thì quay về List và tải lại dữ liệu
                 LoadAllLecturers(this, EventArgs.Empty);
                 _mainView.ShowViewInMainContainer(_listView);
             }
             catch (Exception ex)
             {
-                _detailView.ShowMessage($"Đã có lỗi xảy ra: {ex.Message}");
+                _detailView.ShowMessage($"Đã có lỗi từ cơ sở dữ liệu: {ex.Message}");
             }
         }
     }
